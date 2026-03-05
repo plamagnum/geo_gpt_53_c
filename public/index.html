@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School Test App</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Тести 5-11 класів</h1>
+    <div class="top-actions">
+      <button id="themeToggle">🌓 Тема</button>
+      <button id="logoutBtn" class="hidden">Вийти</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="authSection" class="card">
+      <h2>Вхід / реєстрація</h2>
+      <div class="grid">
+        <input id="name" placeholder="Ім'я" />
+        <input id="password" placeholder="Пароль" type="password" />
+        <select id="classSelect"></select>
+      </div>
+      <div class="actions">
+        <button id="registerBtn">Зареєструватися</button>
+        <button id="loginBtn">Увійти</button>
+      </div>
+      <p class="hint">Логін адміністратора за замовчуванням: <b>admin/admin123</b></p>
+    </section>
+
+    <section id="dashboard" class="hidden">
+      <section class="card">
+        <h2>Мої задачі (CRUD)</h2>
+        <div class="grid">
+          <input id="taskTitle" placeholder="Назва задачі" />
+          <input id="taskDescription" placeholder="Опис" />
+          <button id="addTaskBtn">Додати задачу</button>
+        </div>
+        <div id="tasks"></div>
+      </section>
+
+      <section class="card">
+        <h2>Тести</h2>
+        <div class="grid">
+          <select id="subjectSelect"><option value="">Предмет</option></select>
+          <select id="topicSelect"><option value="">Тема</option></select>
+          <button id="loadTestsBtn">Показати тести</button>
+        </div>
+        <div id="tests"></div>
+        <div id="testRunner"></div>
+      </section>
+
+      <section id="adminPanel" class="card hidden">
+        <h2>Панель адміністратора</h2>
+        <div class="admin-block">
+          <h3>Додати клас / предмет / тему</h3>
+          <div class="grid">
+            <input id="adminClass" placeholder="Клас (наприклад 7)" />
+            <button data-admin="classes">Додати клас</button>
+            <input id="adminSubject" placeholder="Предмет" />
+            <button data-admin="subjects">Додати предмет</button>
+            <input id="adminTopic" placeholder="Тема" />
+            <button data-admin="topics">Додати тему</button>
+          </div>
+        </div>
+
+        <div class="admin-block">
+          <h3>Ручне додавання питання (4 варіанти)</h3>
+          <div class="grid">
+            <input id="manualTopicId" placeholder="topic_id" type="number" />
+            <input id="manualTestTitle" placeholder="Назва тесту" />
+            <input id="manualQuestion" placeholder="Питання" />
+            <input id="opt1" placeholder="Варіант 1" />
+            <input id="opt2" placeholder="Варіант 2" />
+            <input id="opt3" placeholder="Варіант 3" />
+            <input id="opt4" placeholder="Варіант 4" />
+            <input id="correctIndex" placeholder="Індекс правильної (0-3)" type="number" min="0" max="3" />
+            <button id="addQuestionBtn">Зберегти питання</button>
+          </div>
+        </div>
+
+        <div class="admin-block">
+          <h3>Імпорт через JSON API</h3>
+          <textarea id="importJson" rows="8" placeholder='{"class":"7","subject":"Історія","topic":"Київська Русь","test_title":"Тест","questions":[{"text":"...","options":["...","...","...","..."],"correct_index":1}]}'></textarea>
+          <button id="importBtn">Імпортувати JSON</button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div id="toast"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
