@@ -21,7 +21,7 @@ if ($method === 'POST') {
     $title = trim((string)($input['title'] ?? ''));
     $description = trim((string)($input['description'] ?? ''));
     if ($title === '') {
-        respond(['error' => 'Заголовок обовʼязковий'], 422);
+        respond(['error' => 'Заголовок обов\'язковий'], 422);
     }
     $stmt = $pdo->prepare('INSERT INTO tasks (user_id, title, description, status) VALUES (:user_id, :title, :description, :status)');
     $stmt->execute([
@@ -57,7 +57,7 @@ if ($method === 'PUT') {
 if ($method === 'DELETE') {
     $id = (int)($_GET['id'] ?? 0);
     if ($id <= 0) {
-        respond(['error' => 'id обовʼязковий'], 422);
+        respond(['error' => 'id обов\'язковий'], 422);
     }
 
     $query = $user['role'] === 'admin'

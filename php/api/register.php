@@ -11,7 +11,7 @@ $password = (string)($input['password'] ?? '');
 $classId = isset($input['class_id']) ? (int)$input['class_id'] : null;
 
 if ($name === '' || $password === '') {
-    respond(['error' => 'Імʼя та пароль обовʼязкові'], 422);
+    respond(['error' => 'Ім\'я та пароль обов\'язкові'], 422);
 }
 
 $pdo = db();

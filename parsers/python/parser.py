@@ -18,6 +18,7 @@ from bs4 import BeautifulSoup
 
 CONFIG = {
     "question_selector": "div.question",
+    "question_text_selector": ".question-text",
     "option_selector": "li.option",
     "correct_attr": "data-correct",
 }
@@ -56,6 +57,16 @@ def main() -> int:
         if len(options) != 4:
             continue
 
+        # Намагаємося дістати текст питання окремо від текстів варіантів.
+        question_text_node = q.select_one(CONFIG["question_text_selector"])
+        if question_text_node is not None:
+            question_text = question_text_node.get_text(" ", strip=True)
+        else:
+            q_without_options = BeautifulSoup(str(q), "html.parser")
+            for option_node in q_without_options.select(CONFIG["option_selector"]):
+                option_node.decompose()
+            question_text = q_without_options.get_text(" ", strip=True)
+
         normalized_options = [x.get_text(" ", strip=True) for x in options]
         correct_idx = 0
         for idx, opt in enumerate(options):
@@ -65,7 +76,7 @@ def main() -> int:
 
         payload["questions"].append(
             {
-                "text": q.get_text(" ", strip=True),
+                "text": question_text,
                 "options": normalized_options,
                 "correct_index": correct_idx,
             }
